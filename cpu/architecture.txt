@@ -1,0 +1,88 @@
+CPU Architecture
+
+16-bit registers
+16-bit program counter
+16-bit instructions
+30 instructions
+Unsigned
+
+--------------------------
+
+Memory:
+
+Registers - 32 bytes (0-31)
+Program Memory - 256 bytes (32-287)
+Free - 65248 bytes (288-65535)
+
+--------------------------
+
+Flags:
+
+C - carry      bit 1 -> acts on 8th bit for now
+Z - zero       bit 2
+I - interrupt  bit 3
+N - negative   bit 4
+
+--------------------------
+
+Instruction Types:
+
+5 bit -> opcode + 3 bit -> register 1 + 3 bit -> register 2
+5 bit -> opcode + 16 bit -> immediate
+
+
+Instruction set:
+
+add (ra, rb) - add two registers ra+rb, store in ra      00000
+addi (ra, x) - add immediate ra+x, store in ra           00001
+sub (ra, rb) - subtract two registers ra-rb, store in ra 00010
+subi (ra, x) - subtract ra-x, store in ra                00011
+ldi (ra, x) - load immediate x into ra                   00100
+lda (ra, x) - load from address x into ra                00101
+ldw (ra, x) - load ra into address x                     00110
+cmp (ra, rb) - rb-ra, if res is 0 -> Z flag set          00111
+cmpi (ra, x) - x-ra, if res is 0 -> Z flag set           01000
+jmp (x) - jump PC = x - 1                                01001
+rjmp (x) - relative jump PC = PC + x - 1                 01010
+breq (x) - check Z flag, if Z flag then PC = PC + x - 1  01011
+mov (ra, rb) - copies content of rb into ra              01100
+clr (ra) - clears ra                                     01101
+                                    
+
+Flag instructions:
+
+clc - clear carry                                        01110
+clz - clear zero                                         01111
+cln - clear negative                                     10000
+cls - clear signed                                       10001
+cli - clear interrupt                                    10010
+slc - set carry                                          10011
+slz - set zero                                           10100
+sln - set negative                                       10101
+sls - set signed                                         10110
+sli - set interrupt                                      10111
+
+Bit instructions:
+
+and (ra, rb) - ra&rb, store in ra                        11000
+andi (ra, rx) - ra&x, store in ra                        11001
+or (ra, rb) - ra|rb, store in ra                         11010
+ori (ra, x) - ra|x, store in ra                          11011
+xor (ra, rb) - ra^rb, store in ra                        11100
+xori (ra, x) - ra^x, store in ra                         11101
+
+------------------------------
+
+Registers:
+
+sreg - flag register
+ra, rb, rc - general purpose registers
+rx, ry, rp - video registers
+
+sreg - 000
+ra - 001
+rb - 010
+rc - 011
+rx - 100
+ry - 101
+rp - 110
