@@ -4,7 +4,6 @@ CPU Architecture
 16-bit program counter
 16-bit instructions
 30 instructions
-Unsigned
 
 --------------------------
 
