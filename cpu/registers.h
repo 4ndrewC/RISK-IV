@@ -7,6 +7,6 @@
 #define rc 0x0003
 #define rx 0x0004
 #define ry 0x0005
-#define rp 0x0006
+#define ri 0x0006
 
 #endif

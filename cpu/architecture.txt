@@ -12,7 +12,8 @@ Memory:
 
 Registers - 32 bytes (0-31)
 Program Memory - 256 bytes (32-287)
-Free - 65248 bytes (288-65535)
+I2C - 10 bytes (288-297) -> 295 (confirmation byte)
+Free - 65238 bytes (298-65535)
 
 --------------------------
 
@@ -77,7 +78,8 @@ Registers:
 
 sreg - flag register
 ra, rb, rc - general purpose registers
-rx, ry, rp - video registers
+rx, ry - video registers
+ri - I2C control register
 
 sreg - 000
 ra - 001
@@ -85,4 +87,12 @@ rb - 010
 rc - 011
 rx - 100
 ry - 101
-rp - 110
+ri - 110
+
+
+I2C control register:
+
+bit 1 -> STT
+bit 2 -> STP
+bit 3 -> r/w
+bit 4-10 -> slave address

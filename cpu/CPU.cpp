@@ -12,6 +12,10 @@ public:
     }
 
     void fetch(){
+        if(PC>=288){
+            cout<<"Exceeded mem size"<<endl;
+            return;
+        }
         u16 instr = SRAM[PC];
         decodenexecute(instr);
         PC++;

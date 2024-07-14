@@ -6,8 +6,9 @@
 #define reg2(instr) ((instr&0b0000000011100000)>>5)
 
 void decodenexecute(u16 instr){
-    cout<<"\ropcode: "<<bitset<5>(opcode(instr))<<flush;
-    cout<<endl;
+    cout<<"opcode: "<<bitset<5>(opcode(instr))<<endl;
+    // cout<<endl;
+    // cout<<"opcode: "<<(int)opcode(instr)<<endl;
     switch(opcode(instr)){
         case 0b00000:
             add(reg1(instr), reg2(instr));
@@ -23,6 +24,8 @@ void decodenexecute(u16 instr){
             subi(reg1(instr));
             break;
         case 0b00100:
+            // cout<<(int)opcode(instr)<<endl;
+            // cout<<"LDI!!"<<endl;
             ldi(reg1(instr));
             break;
         case 0b00101:
@@ -77,6 +80,7 @@ void decodenexecute(u16 instr){
             sli();
             break;
         case 0b11000:
+            cout<<"here"<<endl;
             an(reg1(instr), reg2(instr));
             break;
         case 0b11001:

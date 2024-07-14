@@ -20,6 +20,31 @@
 #define bit6(byt) ((byt&32)>>5)
 #define bit7(byt) ((byt&64)>>6)
 #define bit8(byt) ((byt&128)>>7)
+#define bit9(byt) ((byt&256)>>8)
+#define bit10(byt) ((byt&512)>>9)
+#define bit11(byt) ((byt&1024)>>10)
+#define bit12(byt) ((byt&2048)>>11)
+#define bit13(byt) ((byt&4096)>>12)
+#define bit14(byt) ((byt&8192)>>13)
+#define bit15(byt) ((byt&16384)>>14)
+#define bit16(byt) ((byt&32768)>>15)
+
+#define set_bit1(byt) (byt|=1)
+#define set_bit2(byt) ((byt|=2))
+#define set_bit3(byt) ((byt|=4))
+#define set_bit4(byt) ((byt|=8))
+#define set_bit5(byt) ((byt|=16))
+#define set_bit6(byt) ((byt|=32))
+#define set_bit7(byt) ((byt|=64))
+#define set_bit8(byt) ((byt|=128))
+#define set_bit9(byt) ((byt|=256))
+#define set_bit10(byt) ((byt|=512))
+#define set_bit11(byt) ((byt|=1024))
+#define set_bit12(byt) ((byt|=2048))
+#define set_bit13(byt) ((byt|=4096))
+#define set_bit14(byt) ((byt|=8192))
+#define set_bit15(byt) ((byt|=16384))
+#define set_bit16(byt) ((byt|=32768))
 
 #define Cf bit1(SRAM[sreg])
 #define Zf bit2(SRAM[sreg])
@@ -99,8 +124,12 @@ void jmp(){
 
 void rjmp(){
     PC++;
-    u16 rel = SRAM[PC];
-    PC = PC + rel - 1;
+    u16 rel = SRAM[PC]&0b0111111111111111;
+    // cout<<(int)SRAM[PC]<<endl;
+    u8 sign = bit16(SRAM[PC]);
+    // cout<<(int)sign<<endl;
+    u16 newpos = sign==0 ? PC+rel-2: PC-rel-2;
+    PC = newpos;
 }
 
 void breq(){
@@ -128,6 +157,7 @@ void sln(){setNf;}
 void sli(){setIf;}
 
 void an(u8 reg1, u8 reg2){
+    // cout<<"and executed"<<endl;
     u16 res = SRAM[reg1]&SRAM[reg2];
     if(!res) setZf; else unsetZf;
     SRAM[reg1] = res;
